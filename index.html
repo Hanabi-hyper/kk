@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProShot | 专业摄影器材</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            blue: '#0071e3',
+                            blueHover: '#0077ed',
+                            gray: '#f5f5f7',
+                            darkGray: '#1d1d1f',
+                            textGray: '#86868b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- 自定义样式 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .backdrop-blur-apple {
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+            }
+            .parallax-bg {
+                will-change: transform;
+            }
+            .fade-element {
+                opacity: 0;
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+        }
+    </style>
+    <style>
+        /* 全局样式 */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* 移除滚动条 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-white text-apple-darkGray">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-out">
+        <div class="max-w-[980px] mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between h-12 md:h-16">
+                <!-- 左上角Logo - 替换为你AI生成的logo图片 -->
+                <a href="#hero" class="flex items-center">
+                    <img id="site-logo" src="https://picsum.photos/id/196/40/40" alt="ProShot Logo" class="h-8 w-auto rounded-md">
+                    <span class="ml-2 text-lg font-semibold hidden sm:block">ProShot</span>
+                </a>
+
+                <!-- 桌面端导航 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#products" class="text-sm hover:text-apple-blue transition-colors">产品</a>
+                    <a href="#specs" class="text-sm hover:text-apple-blue transition-colors">技术规格</a>
+                    <a href="#gallery" class="text-sm hover:text-apple-blue transition-colors">样片展示</a>
+                    <a href="#contact" class="text-sm hover:text-apple-blue transition-colors">联系我们</a>
+                </div>
+
+                <!-- 购买按钮 -->
+                <a href="#contact" class="hidden md:block bg-apple-blue hover:bg-apple-blueHover text-white text-xs font-medium px-4 py-1.5 rounded-full transition-all duration-300">
+                    立即购买
+                </a>
+
+                <!-- 移动端汉堡菜单 -->
+                <button id="menu-toggle" class="md:hidden flex flex-col space-y-1.5">
+                    <span class="w-5 h-0.5 bg-current rounded-full"></span>
+                    <span class="w-5 h-0.5 bg-current rounded-full"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="md:hidden h-0 overflow-hidden transition-all duration-300 ease-out bg-white/90 backdrop-blur-apple">
+            <div class="max-w-[980px] mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#products" class="text-base py-2 hover:text-apple-blue transition-colors">产品</a>
+                <a href="#specs" class="text-base py-2 hover:text-apple-blue transition-colors">技术规格</a>
+                <a href="#gallery" class="text-base py-2 hover:text-apple-blue transition-colors">样片展示</a>
+                <a href="#contact" class="text-base py-2 hover:text-apple-blue transition-colors">联系我们</a>
+                <a href="#contact" class="bg-apple-blue hover:bg-apple-blueHover text-white text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 text-center w-full">
+                    立即购买
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首屏Hero区 -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="parallax-bg absolute inset-0 w-full h-full z-0">
+            <img src="https://picsum.photos/id/1005/1920/1080" alt="专业相机" class="absolute inset-0 w-full h-full object-cover scale-110 opacity-80">
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+        <div class="relative z-10 text-center text-white px-4 max-w-[980px] mx-auto">
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight mb-4 fade-element">
+                超越所见
+            </h1>
+            <p class="text-[clamp(1.2rem,3vw,1.8rem)] font-light mb-8 max-w-3xl mx-auto text-balance fade-element">
+                专业级摄影器材，捕捉每一个精彩瞬间，还原世界本真色彩
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-element">
+                <a href="#products" class="bg-apple-blue hover:bg-apple-blueHover text-white text-base font-medium px-8 py-3 rounded-full transition-all duration-300 w-full sm:w-auto">
+                    探索产品
+                </a>
+                <a href="#specs" class="bg-white/20 backdrop-blur-apple hover:bg-white/30 text-white text-base font-medium px-8 py-3 rounded-full transition-all duration-300 w-full sm:w-auto">
+                    查看规格
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/70">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 产品展示模块 -->
+    <section id="products" class="py-20 md:py-32 bg-apple-gray">
+        <div class="max-w-[980px] mx-auto px-4">
+            <div class="text-center mb-20 fade-element">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4">我们的产品</h2>
+                <p class="text-apple-textGray text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto text-balance">
+                    从全画幅相机到专业定焦镜头，每一款产品都凝聚了光学技术的巅峰之作
+                </p>
+            </div>
+
+            <!-- 产品1：全画幅相机 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm mb-16 fade-element">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="w-full lg:w-1/2 p-8 md:p-12 order-2 lg:order-1">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">ProShot X1 全画幅相机</h3>
+                        <p class="text-apple-textGray mb-6">
+                            搭载全新6100万像素全画幅传感器，ISO 50-204800宽广感光度范围，15档动态范围，8K视频录制能力，为专业摄影师带来极致的画质体验。
+                        </p>
+                        <ul class="mb-8 space-y-2">
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>6100万像素全画幅背照式CMOS</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>12张/秒高速连拍，AI对焦追踪</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>8K 60fps RAW视频录制</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block bg-apple-blue hover:bg-apple-blueHover text-white text-base font-medium px-6 py-2 rounded-full transition-all duration-300">
+                            了解更多
+                        </a>
+                    </div>
+                    <div class="w-full lg:w-1/2 order-1 lg:order-2">
+                        <img src="https://picsum.photos/id/909/1000/800" alt="ProShot X1 全画幅相机" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 产品2：专业镜头 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm mb-16 fade-element">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="w-full lg:w-1/2">
+                        <img src="https://picsum.photos/id/160/1000/800" alt="ProShot Master 定焦镜头" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full lg:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Master 系列定焦镜头</h3>
+                        <p class="text-apple-textGray mb-6">
+                            采用超低色散镜片和非球面镜片设计，F1.4超大光圈，全焦段锐利成像，纳米级抗反射镀膜，无论是人像、风光还是夜景拍摄，都能呈现极致的光学性能。
+                        </p>
+                        <ul class="mb-8 space-y-2">
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>F1.4-F22光圈范围，9片圆形光圈叶片</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>超低色散镜片，消除色差与畸变</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>防尘防滴溅设计，全天候拍摄</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block bg-apple-blue hover:bg-apple-blueHover text-white text-base font-medium px-6 py-2 rounded-full transition-all duration-300">
+                            了解更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 产品3：摄影配件 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm fade-element">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="w-full lg:w-1/2 p-8 md:p-12 order-2 lg:order-1">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">专业摄影配件系列</h3>
+                        <p class="text-apple-textGray mb-6">
+                            从高速SD卡、专业三脚架、滤镜系统到相机稳定器，全系列配件为你的创作保驾护航，每一款产品都经过严苛测试，确保在极端环境下依然稳定可靠。
+                        </p>
+                        <ul class="mb-8 space-y-2">
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>碳纤维三脚架，轻量化高承重设计</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>3轴相机稳定器，AI智能跟随防抖</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 mr-2 flex-shrink-0">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>纳米镀膜UV/ND/CPL滤镜套装</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="inline-block bg-apple-blue hover:bg-apple-blueHover text-white text-base font-medium px-6 py-2 rounded-full transition-all duration-300">
+                            了解更多
+                        </a>
+                    </div>
+                    <div class="w-full lg:w-1/2 order-1 lg:order-2">
+                        <img src="https://picsum.photos/id/513/1000/800" alt="专业摄影配件" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术参数展示区 -->
+    <section id="specs" class="py-20 md:py-32 bg-white">
+        <div class="max-w-[980px] mx-auto px-4">
+            <div class="text-center mb-20 fade-element">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4">技术规格</h2>
+                <p class="text-apple-textGray text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto text-balance">
+                    每一个参数都代表着行业顶尖水准，只为给你带来极致的创作体验
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 fade-element">
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">ProShot X1 核心参数</h3>
+                    <div class="space-y-6">
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">传感器</p>
+                            <p class="text-xl font-medium">35mm全画幅背照式CMOS</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">有效像素</p>
+                            <p class="text-xl font-medium">6100万有效像素</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">感光度范围</p>
+                            <p class="text-xl font-medium">ISO 50-204800（可扩展至50-819200）</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">对焦系统</p>
+                            <p class="text-xl font-medium">1053个相位检测对焦点，覆盖98%画面</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">连拍速度</p>
+                            <p class="text-xl font-medium">12张/秒机械快门，20张/秒电子快门</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">视频录制</p>
+                            <p class="text-xl font-medium">8K 60fps RAW，4K 120fps 10bit 4:2:2</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">机身规格</h3>
+                    <div class="space-y-6">
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">显示屏</p>
+                            <p class="text-xl font-medium">3.2英寸236万点触控翻转屏，100% sRGB色域</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">取景器</p>
+                            <p class="text-xl font-medium">576万点OLED电子取景器，0.78x放大倍率</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">存储介质</p>
+                            <p class="text-xl font-medium">双CFexpress Type B卡槽，兼容UHS-II SD卡</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">电池续航</p>
+                            <p class="text-xl font-medium">LP-E19锂电池，约850张静态照片拍摄</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">机身尺寸</p>
+                            <p class="text-xl font-medium">150 x 110 x 75mm</p>
+                        </div>
+                        <div class="pb-4 border-b border-gray-200">
+                            <p class="text-apple-textGray text-sm mb-1">机身重量</p>
+                            <p class="text-xl font-medium">约890g（含电池、存储卡）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 样片展示区 -->
+    <section id="gallery" class="py-20 md:py-32 bg-apple-gray">
+        <div class="max-w-[1200px] mx-auto px-4">
+            <div class="text-center mb-20 fade-element">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4">样片展示</h2>
+                <p class="text-apple-textGray text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto text-balance">
+                    用ProShot器材捕捉的精彩瞬间，还原世界最真实的色彩与细节
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 fade-element">
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/1015/800/1000" alt="风光样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/1003/800/1000" alt="人像样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/1039/800/1000" alt="城市样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/1018/800/1000" alt="风光样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/1074/800/1000" alt="夜景样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden group">
+                    <div class="overflow-hidden">
+                        <img src="https://picsum.photos/id/167/800/1000" alt="静物样片" class="w-full h-[400px] object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动召唤区 -->
+    <section id="contact" class="py-20 md:py-32 bg-white">
+        <div class="max-w-[980px] mx-auto px-4 text-center fade-element">
+            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6">开启你的创作之旅</h2>
+            <p class="text-apple-textGray text-[clamp(1rem,2vw,1.25rem)] max-w-2xl mx-auto mb-10 text-balance">
+                无论是专业摄影师还是摄影爱好者，ProShot都能为你提供极致的创作体验，捕捉每一个值得铭记的瞬间
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#" class="bg-apple-blue hover:bg-apple-blueHover text-white text-base font-medium px-8 py-3 rounded-full transition-all duration-300 w-full sm:w-auto">
+                    立即购买
+                </a>
+                <a href="#" class="bg-white border border-apple-blue text-apple-blue hover:bg-apple-blue hover:text-white text-base font-medium px-8 py-3 rounded-full transition-all duration-300 w-full sm:w-auto">
+                    预约线下体验
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 bg-apple-gray">
+        <div class="max-w-[980px] mx-auto px-4">
+            <div class="border-b border-gray-300 pb-8 mb-8">
+                <div class="flex items-center mb-6">
+                    <img src="https://picsum.photos/id/196/40/40" alt="ProShot Logo" class="h-8 w-auto rounded-md">
+                    <span class="ml-2 text-lg font-semibold">ProShot</span>
+                </div>
+                <p class="text-apple-textGray text-sm max-w-2xl">
+                    ProShot致力于为全球摄影爱好者和专业摄影师提供顶尖的摄影器材，用科技赋能创作，让每一个瞬间都被完美记录。
+                </p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h4 class="font-semibold mb-4 text-sm">产品</h4>
+                    <ul class="space-y-2 text-sm text-apple-textGray">
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">相机机身</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">镜头系列</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">摄影配件</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">软件服务</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-sm">购买</h4>
+                    <ul class="space-y-2 text-sm text-apple-textGray">
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">在线商店</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">线下门店</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">分期付款</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">以旧换新</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-sm">支持</h4>
+                    <ul class="space-y-2 text-sm text-apple-textGray">
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">使用手册</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">技术支持</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">保修服务</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">固件更新</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-sm">关于我们</h4>
+                    <ul class="space-y-2 text-sm text-apple-textGray">
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">品牌故事</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">新闻中心</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">加入我们</a></li>
+                        <li><a href="#" class="hover:text-apple-blue transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-apple-textGray text-xs">
+                <p>Copyright © 2024 ProShot Inc. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const parallaxBg = document.querySelector('.parallax-bg');
+        const fadeElements = document.querySelectorAll('.fade-element');
+
+        // 导航栏滚动样式变化
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            // 导航栏背景
+            if (scrollY > 50) {
+                navbar.classList.add('bg-white/90', 'backdrop-blur-apple', 'shadow-sm');
+            } else {
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-apple', 'shadow-sm');
+            }
+            // 视差效果
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrollY * 0.5}px)`;
+            }
+        });
+
+        // 移动端菜单切换
+        let menuOpen = false;
+        menuToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.style.height = 'auto';
+                const height = mobileMenu.scrollHeight + 'px';
+                mobileMenu.style.height = '0px';
+                setTimeout(() => {
+                    mobileMenu.style.height = height;
+                }, 10);
+            } else {
+                mobileMenu.style.height = '0px';
+            }
+        });
+
+        // 移动端菜单点击链接关闭
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.style.height = '0px';
+            });
+        });
+
+        // 元素淡入动画 Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Logo替换提示
+        const siteLogo = document.getElementById('site-logo');
+        console.log('%c 提示：请替换左上角的Logo图片为你AI生成的Logo', 'color: #0071e3; font-size: 16px; font-weight: bold;');
+        console.log('%c 替换方法：将img标签的src属性修改为你的Logo图片地址', 'color: #1d1d1f; font-size: 14px;');
+    </script>
+</body>
+</html>
